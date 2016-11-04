@@ -71,14 +71,14 @@ function setMapOnAll(map)
 }
 
 // Löscht die Marker aus der Map, behält sie aber im Array der Reise.
-function clearMarkers() 
+clearMarkers = (function clearMarkers() 
 {
 	console.log("Marker und Polylines entfernen");
 	setMapOnAll(null);
-}
+});
 
 //Zeichnet die Marker und Linien auf die Map
-function drawMarkerAndLines(selectedJourney) 
+drawMarkerAndLines = function drawMarkerAndLines(selectedJourney) 
 {
 	//Sucht die Einträge in der Coordinates Tabelle mit dem Suchfilter "travelName".
 	var foundTravels = Coordinates.find({travelName: selectedJourney}).fetch();
@@ -100,5 +100,4 @@ function drawMarkerAndLines(selectedJourney)
 		}
 	}
 }
-
 

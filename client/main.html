@@ -47,8 +47,13 @@
 			google.maps.event.addListener(map, "click", function (event) {
 				var latitude = event.latLng.lat();
 				var longitude = event.latLng.lng();
+				
+				//Text für den Marker
+				markerText = document.getElementById('travelText').value;
+				document.getElementById('travelText').value = "";
+				
 				//neue Koordinate welche durch den Klick gesetzt wird. Diese wird als Endpunkt für die Polyline verwendet.
-				var coordinate = {travelName: selectedJourneyField, lat: latitude, lng: longitude };
+				var coordinate = {travelName: selectedJourneyField, lat: latitude, lng: longitude, title: markerText };
 				
 				console.log( "Neue Koordinate: " + coordinate );
 				
@@ -72,13 +77,26 @@
 		//Funktion, welche ein Marker auf der Karte darstellt. Point muss vom typ {lat: XX lng: XX} sein
 		function addMarker(point) 
 		{
+			//Marker erzeugen
 			var marker = new google.maps.Marker({
 				position: point,
 				map: map
 			});
+			
+			//Info Window das den Text anzeigt
+			var infowindow = new google.maps.InfoWindow({
+					content: point['title']
+			});
+			
+			//Info Window dem Marker zuweisen
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
+
 			//Marker speichern damit er auch wieder entfernt werden kann
 			markers.push(marker);
 		}
+		
 		
 		//Funktion, welche zwei Punkte mit einer Polyline verbindet
 		function addPolyline(point1, point2) {
@@ -93,7 +111,28 @@
 			//Polyline speichern damit sie auch wieder entfernt werden kann
 			polylines.push(line);
 		}
-
+		
+		function removeLastMarker()
+		{
+			console.log("remove");
+			
+			/*@TODO
+			console.log("Selektierte Reise für Löschen: " + selectedJourneyField);
+			var toRemoveCoordinate = Coordinates.find({travelName: selectedJourneyField}).fetch();
+			console.log("Coordinate to remove: " + toRemoveCoordinate[toRemoveCoordinate.length-1]);
+			
+			var index = markers.indexOf(toRemoveCoordinate[toRemoveCoordinate.length-1]);
+			console.log("index: " + index);
+			if (index > -1) {
+				markers.splice(index, 1);
+				console.log("Marker removed at index: " + index);
+			}
+			
+			clearMarkers();
+			drawMarkerAndLines(selectedJourneyField);*/
+			
+			//markers.remove(toRemoveCoordinate);
+		}
 	</script>
 	<!-- Google Maps einbinden. Dies ermöglicht Zugriff auf die "google.XX" Funktionen -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXL0ITN07xsKyYi-5_RP3gAyjQ7Fl9lqg&callback=initMap"></script>
@@ -102,14 +141,18 @@
 <!-- Template generiert ein Textfeld mit einem Submit-Button, um eine neue Reise zu erstellen -->
 <template name="addJourneyForm">
     <form>
-        <input type="text" name="journeyName">
+        <input type="text" id="journeyName" name="journeyName">
         <input type="submit" value="Add Journey">
     </form>
 <!-- Das hier generiete Dropdown Menü zeigt alle Reisen an, welche in der Datenbank gespeichert wurden -->	
 	<select id="journey-select">
-		<option disabled="disabled" selected="selected">Please Select</option> 
+		<option disabled="disabled" id="selectedTravel" selected="selected">Please Select</option> 
 		{{#each getjourneys}}
 			<option value="{{newJourney}}">{{newJourney}}</option>
 		{{/each}}
 	</select>
+	<form>
+        <input type="text" id="travelText" name="travelText">
+	</form>
+	<button onclick="removeLastMarker()" id="removeMarker">Remove Marker</button>
 </template>
