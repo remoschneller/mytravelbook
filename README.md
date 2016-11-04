@@ -1,12 +1,12 @@
 # mytravelbook
 
 
-## Archtekturübersicht 
+## Architekturübersicht 
 
 ![Architektur](/_images/Architektur.PNG)
 
 ## Installationsanleitung
-﻿### Installationsanleitung unter Windows: 
+### Installationsanleitung unter Windows: 
 
 1. Meteor (Version 1.4) auf https://www.meteor.com/ herunterladen und installieren.
 Den Schritt "Account Register" mit "Skip this Step" überspringen.
