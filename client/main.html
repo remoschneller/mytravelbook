@@ -1,0 +1,115 @@
+<head>
+	<title>mytravelbook</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+	<h1>Welcome to Meteor!</h1>
+	
+	<!--Fügt das "Add Journey" Template ins HTML Frontend ein. -->
+	{{> addJourneyForm}}
+	<!--Fügt das Google Maps Template ins HTML Frontend ein. -->
+	{{> maptemp}}
+</body>
+
+<template name="maptemp">
+	<div id="map"></div>
+
+	<ul>
+		{{#each initialfunct}}
+		<li>{{lat}}: {{lng}}</li>
+		{{/each}}
+	</ul>
+
+	<script type="text/javascript">
+		//Koordinaten an welchen die Karte beim Startup stehen soll
+		mapStartCoordinates = { lat: 46.858494, lng: 9.523870 };
+		//Google Maps Karte
+		map;
+		//Array für Google Maps Marker
+		markers = [];
+		//Array für Google Maps Polylines
+		polylines = [];
+		//Variable für den älteren Marker, der mit dem aktuellen Marker verbunden werden muss. 
+		startCoordinate = null;
+		
+		
+		//Google Maps Karte initialisieren
+		function initMap()
+		{
+			//Karte erstellen
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: mapStartCoordinates,
+				zoom: 4
+			});
+			
+			//EventListener auf Google Maps Karte welcher bei Klick in die Karte die Koordinaten inkl. ausgweählter Reise in die DB speichert.
+			google.maps.event.addListener(map, "click", function (event) {
+				var latitude = event.latLng.lat();
+				var longitude = event.latLng.lng();
+				//neue Koordinate welche durch den Klick gesetzt wird. Diese wird als Endpunkt für die Polyline verwendet.
+				var coordinate = {travelName: selectedJourneyField, lat: latitude, lng: longitude };
+				
+				console.log( "Neue Koordinate: " + coordinate );
+				
+				//Koordinate in DB speichern
+				Coordinates.insert(coordinate);
+				
+				//Neuen Marker hinzufügen
+				addMarker(coordinate);
+							
+				//Wenn eine Startkoordinate vorhanden ist, wird eine Polyline zwischen dem neuen und dem bereits vorhanden Marker gezogen (Reiselinie)
+				if(startCoordinate != null)
+				{
+					//Neue Polyline hinzufügen um zwei Marker zu verbinden
+					addPolyline(startCoordinate, coordinate);
+				}
+				//Der aktuelle Marker wird als letzter Marker gesetzt.
+				startCoordinate = coordinate;
+			}); 
+		}
+	  
+		//Funktion, welche ein Marker auf der Karte darstellt. Point muss vom typ {lat: XX lng: XX} sein
+		function addMarker(point) 
+		{
+			var marker = new google.maps.Marker({
+				position: point,
+				map: map
+			});
+			//Marker speichern damit er auch wieder entfernt werden kann
+			markers.push(marker);
+		}
+		
+		//Funktion, welche zwei Punkte mit einer Polyline verbindet
+		function addPolyline(point1, point2) {
+			var line = new google.maps.Polyline({
+				path: [point1, point2],
+				geodesic: true,
+				strokeColor: '#FF0000',
+				strokeOpacity: 1.0,
+				strokeWeight: 2
+			});
+			line.setMap(map);
+			//Polyline speichern damit sie auch wieder entfernt werden kann
+			polylines.push(line);
+		}
+
+	</script>
+	<!-- Google Maps einbinden. Dies ermöglicht Zugriff auf die "google.XX" Funktionen -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXL0ITN07xsKyYi-5_RP3gAyjQ7Fl9lqg&callback=initMap"></script>
+</template>
+
+<!-- Template generiert ein Textfeld mit einem Submit-Button, um eine neue Reise zu erstellen -->
+<template name="addJourneyForm">
+    <form>
+        <input type="text" name="journeyName">
+        <input type="submit" value="Add Journey">
+    </form>
+<!-- Das hier generiete Dropdown Menü zeigt alle Reisen an, welche in der Datenbank gespeichert wurden -->	
+	<select id="journey-select">
+		<option disabled="disabled" selected="selected">Please Select</option> 
+		{{#each getjourneys}}
+			<option value="{{newJourney}}">{{newJourney}}</option>
+		{{/each}}
+	</select>
+</template>
