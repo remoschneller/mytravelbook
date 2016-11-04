@@ -3,7 +3,7 @@
 
 ## Archtekturübersicht 
 
-![Architektur](/images/archtitekt.png)
+![Architektur](/_images/Architektur.PNG)
 
 ## Installationsanleitung
 ﻿### Installationsanleitung unter Windows: 
