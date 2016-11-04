@@ -28,7 +28,7 @@ Alle Informationen zum Code sind in den Files als Kommentar enthalten.
 1. Im Textfeld Reisenamen eingeben. "Add Journey" Button bestätigen. 
 --> Reise wird im Dropdown Menu aufgeführt.
 2. Reise auswählen im Dropdown Menu. Per Mausklick in die Karte können nun Punkte erstellt werden. Ab 2 Punkten werden diese 
-automatisch verbunden (chronologisch)
+automatisch verbunden (chronologisch). Im untersten Textfeld kann eine Beschreibung für den Marker eingefügt werden. Dieser wird bei einem Klick auf den Marker angezeigt.
 3. Wenn eine zweite Reise erstellt wird, erscheint diese auch im Dropdown Menu. Wird die neue Reise ausgewählt, erscheint 
 die Karte blank. Per Mausklick in die Karte können nun Punkte erstellt werden. Ab 2 Punkten werden diese 
 automatisch verbunden (chronologisch)
