@@ -3,12 +3,12 @@
 ![Architektur](/_images/Architektur.PNG)
 
 ## Sicherheitsarchitektur
-Gewisse Sicherheitsaspekte werden bereits vom Meteor-Framework abgedeckt. So kann man mittels weiterer Pakete, welche man von den Meteor-Entwicklern hinzufügen kann, die Sicherheitsanforderungen nach eigenem Ermessen erhöhen oder lockern.
+Sicherheitsaspekte werden vom Meteor-Framework abgedeckt und sind vorgegeben. Mittels weiterer Pakete, welche man von Meteor hinzufügen kann, können gewisse Sicherheitsfunktionalitäten ergänzt werden.
 Das Team entschied sich, die Sicherheitsaspekte so zu belassen, wie sie von Meteor als Standard zur Verfügung gestellt werden.
 Bei einem allfälligen Release müsste das Konzept sicher noch überarbeitete werden, um die Privatsphäre-Rechte der Benutzer zu gewährleisten.
 
 ## lib
-Das File Database.je sorgt dafür, dass die Datenbank (hier MongoDB) initialisiert wird und die beiden Tabellen "Coordinates" und "Journeys" erstellt werden.
+Das File Database.je sorgt dafür, dass die Datenbank (hier MongoDB) initialisiert wird und die beiden Tabellen "Coordinates" und "Journeys" erstellt werden. Die MongoDB speichert Daten im JSON Format.
 
 ## client
 ### main.html:
@@ -17,7 +17,7 @@ Meteor strukturiert die HTML-Files mittels Templates, welche dann in den Body ei
 
 ### main.js:
 Es gibt von den Meteor-Entwicklern zur Verfügung gestellte Möglichkeiten, einfach mit den Templates zu arbeiten. Hier gehören die "helpers" und "event" Funktionen dazu, mit denen Funktionalitäten einfacher programmiert werden können.
-Auch die spezifischen Funktionalitäten von Google Maps werden hier als Funktionen definiert.
+Auch hilfs Funktionalitäten von Google Maps werden hier als Funktionen definiert.
 
 ### main.css:
 Hier wird im nächsten Schritt das Design der Applikation definiert.
