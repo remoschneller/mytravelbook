@@ -3,7 +3,7 @@
 
 ## Architekturübersicht 
 
-![Architektur](/_images/Architektur.PNG)
+![Architektur](architektur.md)
 
 ## Installationsanleitung
 ### Installationsanleitung unter Windows: 
