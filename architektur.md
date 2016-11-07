@@ -1,17 +1,23 @@
-Sicherheitsarchitektur
-Gewisse Sicherheitsaspekte werden bereits vom Meteor-Framework abgedeckt. So kann man mittels weiterer Pakete, welche man von den Meteor-Entwicklern hinzufügen kann, die Sicherheitsanforderungen nach eigenem Ermessen erhöhen oder lockern.
-Das Team entschied sich, die Sicherheitsaspekte so zu belassen, wie sie von Meteor als Standard zur Verfügung gestellt werden.
-Bei einem allfälligen Release müsste das Konzept sicher noch überarbeitete werden, um die Privatsphäre-Rechte der Benutzer zu gewährleisten.
+# ArchitekturÃ¼bersicht 
 
-LIB
-Das File Database.je sorgt dafür, dass die Datenbank (hier MongoDB) initialisiert wird und die beiden Tabellen "Coordinates" und "Journeys" erstellt werden.
+![Architektur](/_images/Architektur.PNG)
 
-CLIENT
-main.html:
-Die Google-Maps API wird hier eingebunden. Mittels eines Keys, den man über Google löst, kann die Karte initialisiert werden. Google stellt ein Volumen von 25'000 loadrequests der Karte kostenlos zur Verfügung. 
+## Sicherheitsarchitektur
+Gewisse Sicherheitsaspekte werden bereits vom Meteor-Framework abgedeckt. So kann man mittels weiterer Pakete, welche man von den Meteor-Entwicklern hinzufÃ¼gen kann, die Sicherheitsanforderungen nach eigenem Ermessen erhÃ¶hen oder lockern.
+Das Team entschied sich, die Sicherheitsaspekte so zu belassen, wie sie von Meteor als Standard zur VerfÃ¼gung gestellt werden.
+Bei einem allfÃ¤lligen Release mÃ¼sste das Konzept sicher noch Ã¼berarbeitete werden, um die PrivatsphÃ¤re-Rechte der Benutzer zu gewÃ¤hrleisten.
+
+## lib
+Das File Database.je sorgt dafÃ¼r, dass die Datenbank (hier MongoDB) initialisiert wird und die beiden Tabellen "Coordinates" und "Journeys" erstellt werden.
+
+## client
+### main.html:
+Die Google-Maps API wird hier eingebunden. Mittels eines Keys, den man Ã¼ber Google lÃ¶st, kann die Karte initialisiert werden. Google stellt ein Volumen von 25'000 loadrequests der Karte kostenlos zur VerfÃ¼gung. 
 Meteor strukturiert die HTML-Files mittels Templates, welche dann in den Body eingebunden werden.
-main.js:
-Es gibt von den Meteor-Entwicklern zur Verfügung gestellte Möglichkeiten, einfach mit den Templates zu arbeiten. Hier gehören die "helpers" und "event" Funktionen dazu, mit denen Funktionalitäten einfacher programmiert werden können.
-Auch die spezifischen Funktionalitäten von Google Maps werden hier als Funktionen definiert.
-main.css:
-Hier wird im nächsten Schritt das Design der Applikation definiert.
+
+### main.js:
+Es gibt von den Meteor-Entwicklern zur VerfÃ¼gung gestellte MÃ¶glichkeiten, einfach mit den Templates zu arbeiten. Hier gehÃ¶ren die "helpers" und "event" Funktionen dazu, mit denen FunktionalitÃ¤ten einfacher programmiert werden kÃ¶nnen.
+Auch die spezifischen FunktionalitÃ¤ten von Google Maps werden hier als Funktionen definiert.
+
+### main.css:
+Hier wird im nÃ¤chsten Schritt das Design der Applikation definiert.
