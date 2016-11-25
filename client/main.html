@@ -1,15 +1,93 @@
 <head>
-	<title>mytravelbook</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Willkommen bei My Travel Diary</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+    rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+    rel="stylesheet" type="text/css">
+
 	<link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-	<h1>Welcome to Meteor!</h1>
-	
-	<!--Fügt das "Add Journey" Template ins HTML Frontend ein. -->
-	{{> addJourneyForm}}
-	<!--Fügt das Google Maps Template ins HTML Frontend ein. -->
-	{{> maptemp}}
+	 <div class="brand">My Travel Book</div>
+    <div class="address-bar">Remo Schneller | Roman Wilhelm | Luca Berger</div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Wilkommen bei My Travel Book</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="news.html">News</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                    <li>
+                        <a href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+
+
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-8">
+                    <!--Fügt das Google Maps Template ins HTML Frontend ein. -->
+                    {{> maptemp}}
+                </div>
+                <div class="col-lg-4">
+                    <!--Fügt das "Add Journey" Template ins HTML Frontend ein. -->
+                    {{> addJourneyForm}}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; MyTravelBook 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 <template name="maptemp">
@@ -140,19 +218,30 @@
 
 <!-- Template generiert ein Textfeld mit einem Submit-Button, um eine neue Reise zu erstellen -->
 <template name="addJourneyForm">
-    <form>
-        <input type="text" id="journeyName" name="journeyName">
-        <input type="submit" value="Add Journey">
+
+ <form>
+ <h1> Step 1</h1>
+ <p> Choose a Name for your Travel </p>
+        <input type="text" class="form-control" name="journeyName" placeholder="Journey Name">
+        <button type="submit" value="Add Journey" class="btn btn-primary"> Add Journey </button>
     </form>
 <!-- Das hier generiete Dropdown Menü zeigt alle Reisen an, welche in der Datenbank gespeichert wurden -->	
-	<select id="journey-select">
-		<option disabled="disabled" id="selectedTravel" selected="selected">Please Select</option> 
+<h1> Step 2</h1>
+ <p> Choose your Travel </p>
+	<select id="journey-select" class = "form-control">
+		<option disabled="disabled" selected="selected">Please Select</option> 
 		{{#each getjourneys}}
 			<option value="{{newJourney}}">{{newJourney}}</option>
 		{{/each}}
 	</select>
-	<form>
-        <input type="text" id="travelText" name="travelText">
+    <form>
+	<h1> Step 3</h1>
+ <p> Write a Text, which you like to add to your Journey </p>
+	<input type="text" id="travelText" name="travelText" class = "form-control" placeholder="Marker Description">
+	<h1> Step 4</h1>
+ <p> Click on the Map on the position you want to add your Journey </p>	 
 	</form>
-	<button onclick="removeLastMarker()" id="removeMarker">Remove Marker</button>
+	<h1> Step 5</h1>
+ <p> <b>Ignore this useless stupid Button which doesn't work! </b> </p>	
+	<button onclick="removeLastMarker()" id="removeMarker" class="btn btn-primary">Remove Marker</button>
 </template>
