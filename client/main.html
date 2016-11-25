@@ -125,13 +125,14 @@
 			google.maps.event.addListener(map, "click", function (event) {
 				var latitude = event.latLng.lat();
 				var longitude = event.latLng.lng();
+				var activeUser = "testUser";
 				
 				//Text für den Marker
 				markerText = document.getElementById('travelText').value;
 				document.getElementById('travelText').value = "";
 				
 				//neue Koordinate welche durch den Klick gesetzt wird. Diese wird als Endpunkt für die Polyline verwendet.
-				var coordinate = {travelName: selectedJourneyField, lat: latitude, lng: longitude, title: markerText };
+				var coordinate = {username: activeUser, travelName: selectedJourneyField, lat: latitude, lng: longitude, title: markerText };
 				
 				console.log( "Neue Koordinate: " + coordinate );
 				
