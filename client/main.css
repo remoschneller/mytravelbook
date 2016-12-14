@@ -6,8 +6,9 @@ html, body {
 }
 
 #map {
-	height: 400px;
+	height: 800px;
     width: 100%;
+    float: right;
 }
 /*!
  * Start Bootstrap - Business Casual (http://startbootstrap.com/)
@@ -45,6 +46,10 @@ p {
 hr {
     max-width: 400px;
     border-color: #999999;
+}
+
+.login-link-text{
+    text-decoration:none;
 }
 
 .brand,
@@ -89,6 +94,8 @@ hr {
 }
 
 .box {
+    width: 80%;
+    margin:auto;
     margin-bottom: 20px;
     padding: 30px 15px;
     background: #fff;

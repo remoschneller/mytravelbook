@@ -1,96 +1,106 @@
 <head>
 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <title>Willkommen bei My Travel Diary</title>
+	<title>Willkommen bei My Travel Diary</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="css/business-casual.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="css/business-casual.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-    rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-    rel="stylesheet" type="text/css">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+		rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+		rel="stylesheet" type="text/css">
 
 	<link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-	 <div class="brand">My Travel Book</div>
-    <div class="address-bar">Remo Schneller | Roman Wilhelm | Luca Berger</div>
+	<div class="brand">My Travel Book</div>
+	<div class="address-bar">Remo Schneller | Roman Wilhelm | Luca Berger</div>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	<!-- Navigation -->
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="index.html">Wilkommen bei My Travel Book</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="news.html">News</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Login</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-
-
-    </nav>
-
-    <div class="container">
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-8">
-                    <!--Fügt das Google Maps Template ins HTML Frontend ein. -->
-                    {{> maptemp}}
-                </div>
-                <div class="col-lg-4">
-                    <!--Fügt das "Add Journey" Template ins HTML Frontend ein. -->
-                    {{> addJourneyForm}}
-                </div>
-            </div>
-        </div>
-    </div>
-    
-        <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; MyTravelBook 2016</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+				<!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+				<a class="navbar-brand" href="/">Wilkommen bei My Travel Book</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/"> Home</a>
+					</li>
+					<li>
+						<a href="about">About</a>
+					</li>
+					<li>
+						<a href="contact">Contact</a>
+					</li>
+					<li>
+						<a>{{> loginButtons}} </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		{{Route}}
+	</div>
 </body>
 
+<!-- Main Template, enthält Start Text, basiert auf Login -->
+<template name="main">
+	<div class="row">
+		<div class="box">
+			<!-- Wenn eingeloggt -->
+			{{#if currentUser}}
+				<div class="col-lg-8">
+					<!--Fügt das Google Maps Template ins HTML Frontend ein. -->
+					{{> maptemp}}
+				</div>
+				<div class="col-lg-4">
+					<!--Fügt das "Add Journey" Template ins HTML Frontend ein. -->
+					{{> addJourneyForm}}
+				</div>
+			<!-- Nicht eingeloggt -->	
+			{{else}}
+				<div class="col-lg-12">
+					<div class="row">
+						<hr>
+						<h2 class="intro-text text-center">Travel The World with <strong> My Travel Book</strong></h2>
+						<hr>
+						<p align = "center">Wollen Sie die Welt bereisen? <br/> Wollen Sie ihre Erlebnisse mit Ihren Freunden teilen? <br/> Das können Sie mit MyTravelBook schnell und einfach tun, wo auch immmer sie sich auf der Welt befinden. Ihre Freunde können nachverfolgen wo Sie sich gerade befinden und was Sie alles an diesen Orten erleben. Loggen Sie sich ein und erleben Sie MyTravelBook um die schönsten Momente Ihrer Reisen festzuhalten </p>
+						<hr>
+						<img class="img-responsive img-border img-left" src="img/Titelbild.jpg" alt="">
+					</div>
+				</div>
+			{{/if}}
+		</div>
+	</div>
+	{{> footer}}
+</template>
+
+<!-- Map Template -->
 <template name="maptemp">
+	<hr>
+	<h2 class="intro-text text-center">Travel The World with <strong> My Travel Book</strong></h2>
+	<hr>
 	<div id="map"></div>
 
 	<ul>
@@ -111,7 +121,6 @@
 		//Variable für den älteren Marker, der mit dem aktuellen Marker verbunden werden muss. 
 		startCoordinate = null;
 		
-		
 		//Google Maps Karte initialisieren
 		function initMap()
 		{
@@ -125,7 +134,7 @@
 			google.maps.event.addListener(map, "click", function (event) {
 				var latitude = event.latLng.lat();
 				var longitude = event.latLng.lng();
-				var activeUser = "testUser";
+				var activeUser = Meteor.userId();
 				
 				//Text für den Marker
 				markerText = document.getElementById('travelText').value;
@@ -176,7 +185,6 @@
 			markers.push(marker);
 		}
 		
-		
 		//Funktion, welche zwei Punkte mit einer Polyline verbindet
 		function addPolyline(point1, point2) {
 			var line = new google.maps.Polyline({
@@ -191,27 +199,6 @@
 			polylines.push(line);
 		}
 		
-		function removeLastMarker()
-		{
-			console.log("remove");
-			
-			/*@TODO
-			console.log("Selektierte Reise für Löschen: " + selectedJourneyField);
-			var toRemoveCoordinate = Coordinates.find({travelName: selectedJourneyField}).fetch();
-			console.log("Coordinate to remove: " + toRemoveCoordinate[toRemoveCoordinate.length-1]);
-			
-			var index = markers.indexOf(toRemoveCoordinate[toRemoveCoordinate.length-1]);
-			console.log("index: " + index);
-			if (index > -1) {
-				markers.splice(index, 1);
-				console.log("Marker removed at index: " + index);
-			}
-			
-			clearMarkers();
-			drawMarkerAndLines(selectedJourneyField);*/
-			
-			//markers.remove(toRemoveCoordinate);
-		}
 	</script>
 	<!-- Google Maps einbinden. Dies ermöglicht Zugriff auf die "google.XX" Funktionen -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXL0ITN07xsKyYi-5_RP3gAyjQ7Fl9lqg&callback=initMap"></script>
@@ -219,30 +206,111 @@
 
 <!-- Template generiert ein Textfeld mit einem Submit-Button, um eine neue Reise zu erstellen -->
 <template name="addJourneyForm">
+	<!-- Wenn angemeldet -->
+	{{#if currentUser}}
+		<form>
+			<h2> Step 1</h2>
+			<p> Choose a Name for your Travel </p>
+			<input type="text" class="form-control" name="journeyName" placeholder="Journey Name">
+			<br/>
+			<button type="submit" value="Add Journey" class="btn btn-primary"> Add Journey </button>
+		</form>
+		<br/>
+		<!-- Das hier generiete Dropdown Menü zeigt alle Reisen an, welche in der Datenbank gespeichert wurden -->
+		<h2> Step 2</h2>
+		<p> Choose your Travel </p>
+		<select id="journey-select" class="form-control">
+			<option disabled="disabled" selected="selected">Please Select</option> 
+			{{#each getjourneys}}
+				<option value="{{newJourney}}">{{newJourney}}</option>
+			{{/each}}
+		</select>
+		<form>
+			<br/>
+			<h2> Step 3</h2>
+			<p> Write a Text, which you like to add to your Journey </p>
+			<textarea class="form-control" rows="5" id="travelText" name="travelText" placeholder="Marker Description"></textarea>
+			<br/>
+			<h2> Step 4</h2>
+			<p> Click on the Map on the position you want to add your Journey </p>
+		</form>
+	{{/if}}
+</template>
 
- <form>
- <h1> Step 1</h1>
- <p> Choose a Name for your Travel </p>
-        <input type="text" class="form-control" name="journeyName" placeholder="Journey Name">
-        <button type="submit" value="Add Journey" class="btn btn-primary"> Add Journey </button>
-    </form>
-<!-- Das hier generiete Dropdown Menü zeigt alle Reisen an, welche in der Datenbank gespeichert wurden -->	
-<h1> Step 2</h1>
- <p> Choose your Travel </p>
-	<select id="journey-select" class = "form-control">
-		<option disabled="disabled" selected="selected">Please Select</option> 
-		{{#each getjourneys}}
-			<option value="{{newJourney}}">{{newJourney}}</option>
-		{{/each}}
-	</select>
-    <form>
-	<h1> Step 3</h1>
- <p> Write a Text, which you like to add to your Journey </p>
-	<input type="text" id="travelText" name="travelText" class = "form-control" placeholder="Marker Description">
-	<h1> Step 4</h1>
- <p> Click on the Map on the position you want to add your Journey </p>	 
-	</form>
-	<h1> Step 5</h1>
- <p> <b>Ignore this useless stupid Button which doesn't work! </b> </p>	
-	<button onclick="removeLastMarker()" id="removeMarker" class="btn btn-primary">Remove Marker</button>
+<!-- About Seite -->
+<template name="about">
+	<div class="row">
+		<div class="box">
+			<div class="col-lg-12">
+				<hr>
+				<h2 class="intro-text text-center">About My Travel Book</h2>
+				<hr>
+				<div class="col-lg-6 col-sm-12">
+					<img class="img-responsive img-border img-left" src="img/bus.jpg" alt="">
+				</div>
+				<div class="col-lg-6">
+					<hr class="visible-xs">
+					<p>Das MyTravelBook wurde im Rahmen des Moduls «IuK_III_Webapplikation» von Luca Berger, Remo Schneller und Roman Wilhelm
+						entwickelt. Die drei Studenten, welche im 5. Semester des Bachelorstudiums Systemtechnik FH an der NTB Buchs dieses
+						Modul besuchten, entwickelten diesen Prototyp eines digitalen Reisetagebuches.</p>
+					<br/>
+					<h3>Grundidee</h3>
+					<p>Eine Webapplikation, welche von Reisenden benutzt werden kann, um schnell und unkompliziert ihre Erlebnisse während
+						der Reise mit ihren Freunden und Angehörigen zu teilen.</p>
+					<br/>
+					<h3>Problem</h3>
+					<p>Reisende haben oft nur für kurze Zeit Internetzugang und dieser ist dann meist auch sehr langsam. So können sie nur
+						schwer ihre Erlebnisse während der Reise mit ihren Angehörigen und Freunden Teilen. </p>
+					<br/>
+					<h3> Lösung</h3>
+					<p>Das MyTravelBook bietet eine Webapplikation, bei der man seine Fotos auf einfache Weise in eine eigene interaktive Weltkarte
+						Ortsbezogen einfügen kann. Seine Bekannten können mit dem entsprechenden Link auf seine Seite mit View-Rechten zugreifen
+						und seine Erlebnisse anschauen. </p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{> footer}}
+</template>
+
+<!-- Contact Seite-->
+<template name="contact">
+	<div class="row">
+		<div class="box">
+			<div class="col-lg-12">
+				<hr>
+				<h2 class="intro-text text-center">Contact</h2>
+				<hr>
+				<div class="col-lg-6  col-sm-12">
+					<img class="img-responsive img-border img-left" src="img/suitcase.jpg" alt="">
+				</div>
+
+				<div class="col-lg-6">
+					<p>Bei Fragen, Problemen oder Anregungen melden Sie sich bitte bei einer der folgenden Personen: </p>
+					<br/>
+					<hr class="visible-xs">
+					<h2> Luca Berger </h2>
+					<p><a href="mailto:luca.berger@ntb.ch"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>  &nbsp; luca.berger@ntb.ch</p>
+					<br/>
+					<h2> Remo Schneller </h2>
+					<p><a href="mailto:remo.schneller@ntb.ch"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a> &nbsp; remo.schneller@ntb.ch</p>
+					<br/>
+					<h2> Roman Wilhelm </h2>
+					<p><a href="mailto:roman.wilhelm@ntb.ch"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>  &nbsp; roman.wilhelm@ntb.ch</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{> footer}}
+</template>
+
+<!-- Footer -->
+<template name = "footer">
+	<footer>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<p>Copyright &copy; MyTravelBook 2016</p>
+			</div>
+		</div>		
+	</footer>
 </template>
